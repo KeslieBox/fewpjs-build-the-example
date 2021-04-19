@@ -4,6 +4,36 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+const modal = document.querySelector('#modal')
+// modal.hidden = true
+
+const heart = document.querySelector('.like-glyph')
+
+const glyphStates = {
+  "♡": "♥",
+  "♥": "♡"
+};
+
+const changeColor = {
+  "red": "",
+  "": "red"
+}
+
+heart.addEventListener("click", e => {
+  mimicServerCall('http://mimicServer.example.com')
+    .then(resp => {
+        heart.innerText = glyphStates[heart.innerText]
+        heart.style.color = changeColor[heart.style.color]
+    })
+
+    .catch(error => {
+      modal.className = ""
+      modal.innerText = error
+      setTimeout(() => { modal.className = "hidden", 3000})
+    })
+})
+
+
 
 
 
